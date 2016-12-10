@@ -2,9 +2,10 @@ from flask import Flask, render_template, Response
 import datetime
 from time import sleep
 from picamera import PiCamera
-
+import RPi.GPIO. as GPIO
 app = Flask(__name__)
-# camera = PiCamera()
+
+#SET CAMERA SETTINGS 
 camera = PiCamera()
 camera.resolution = (1024, 768)
 camera.vflip = True
