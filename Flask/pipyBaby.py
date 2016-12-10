@@ -2,7 +2,7 @@ from flask import Flask, render_template, Response
 import datetime
 from time import sleep
 from picamera import PiCamera
-import RPi.GPIO. as GPIO
+import RPi.GPIO as GPIO
 app = Flask(__name__)
 
 #SET CAMERA SETTINGS 
@@ -34,6 +34,7 @@ def index_camera():
 	camera.vflip = True
 	# sleep(2)
 	camera.capture('static/foo.jpg')
+	sleep(.1)
 	return render_template('camera.html')
 
 
