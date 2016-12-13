@@ -44,12 +44,15 @@ def getEnv():
     }
     return(results)
 
+initialEnv = getEnv()
+
 """BEGIN FLASK PAGE DEFINITIONS"""
 
 @app.route('/')
 def index():
     """Video streaming home page."""
-    return render_template('index.html')
+    templateData = initialEnv
+    return render_template('index.html', **initialEnv)
 
 @app.route('/video_feed')
 def video_feed():
@@ -70,23 +73,23 @@ def readTempAndHumidity():
     mimetype="application/json")
     return(resp)
 
-@app.route("/readPin/<pin>")
-def readPin(pin):
+# @app.route("/readPin/<pin>")
+# def readPin(pin):
 
-    GPIO.setup(int(pin), GPIO.OUT)
-    if GPIO.input(int(pin)) == True:
-        response = "Pin number " + pin + " is high!"
-        GPIO.output(int(pin), GPIO.LOW)
-    else:
-        response = "Pin number " + pin + " is low!"
-        GPIO.output(int(pin), GPIO.HIGH)
+#     GPIO.setup(int(pin), GPIO.OUT)
+#     if GPIO.input(int(pin)) == True:
+#         response = "Pin number " + pin + " is high!"
+#         GPIO.output(int(pin), GPIO.LOW)
+#     else:
+#         response = "Pin number " + pin + " is low!"
+#         GPIO.output(int(pin), GPIO.HIGH)
 
 
-    templateData = {
-    'title' : 'Status of pin ' + pin,
-    'response' : response
-    }
-    return render_template('pin.html', **templateData)
+#     templateData = {
+#     'title' : 'Status of pin ' + pin,
+#     'response' : response
+#     }
+#     return render_template('pin.html', **templateData)
 
 
 if __name__ == '__main__':

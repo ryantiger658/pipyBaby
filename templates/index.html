@@ -63,6 +63,9 @@
 		    <h1>PiPyBaby</h1>
 		</div>
 		<div class="col-xs-12"><img src="{{ url_for('video_feed') }}" class="img-responsive center-block" alt="Responsive image"></div>
+		<div class="col-xs-12 text-center">
+		    <h1>Current Temperature <span id="theCurrentTemp">{{ temperature }}</span> F, Humidity <span id="theCurrentHumid">{{ humidity }}</span>%</h1>
+		</div>
 
 
 
@@ -71,5 +74,6 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="{{ url_for('static', filename='js/PiPyBaby.js') }}"></script>
 
 </html>
