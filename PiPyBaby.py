@@ -31,7 +31,15 @@ def gen(camera):
 # Get the current ambient enviroment 
 def getEnv():
     # Read from the sensor
-    humidity, temperature = envSensor.read_retry(AdafruitDHTSensor, tempAndHumidityPin)
+    humidity, temperature = envSensor.read(AdafruitDHTSensor, tempAndHumidityPin)
+    if humidity is None or temp is None:
+        humidity = 1000
+
+    while humidity > 100:
+        humidity, temperature = envSensor.read(AdafruitDHTSensor, tempAndHumidityPin)
+        if humidity is None or temp is None:
+            humidity = 1000
+        time.sleep(5)
 
     # If the global temp is set to fahrenheit convert the temp
     if temp == "F":

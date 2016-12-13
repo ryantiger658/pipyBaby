@@ -6,7 +6,7 @@ $(document).ready(function(){
 // Get the enviroment information every 35 seconds
 window.setInterval(function(){
 	getEnv();
-}, 35000);
+}, 60000);
 
 // Function to get the enviroment information
 function getEnv() {
