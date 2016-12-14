@@ -1,6 +1,53 @@
 body {
 	background-color: #eee;
+	color: #212121;
+	font-family: 'Raleway', sans-serif;
 }
 img {
 	border-radius: 2px;
+}
+h1 {
+	color: #212121;
+}
+.navbar {
+	background-color: #C2185B;
+	color: #FFFFFF;
+}
+.navbar-nav a, .navbar-brand {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+.navbar-nav a:hover{
+	color:#212121;
+}
+.fullVideo {
+    min-height:100%;
+    min-width:100%;
+    height:auto;
+    width:auto;
+    position:absolute;
+    top:-100%; bottom:-100%;
+    left:-100%; right:-100%;
+    margin:auto;
+}
+
+.videoBox { 
+   position: relative; 
+   display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+.fullScreenLink { 
+   position: absolute; 
+   top: 660px; 
+   left: 1210px; 
+
+   font-size: 40px;
+   color: #555;
+}
+
+.fullScreenLink:hover { 
+   color: #536DFE;
 }

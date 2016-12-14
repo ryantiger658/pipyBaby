@@ -2,10 +2,7 @@
 from flask import Flask, render_template, Response, jsonify
 from camera_pi import Camera
 from picamera import PiCamera
-import RPi.GPIO as GPIO
-import Adafruit_DHT as envSensor
-import json
-import time
+import RPi.GPIO as GPIO, Adafruit_DHT as envSensor, json, time
 
 app = Flask(__name__)
 
@@ -30,6 +27,7 @@ def gen(camera):
 
 # Get the current ambient enviroment 
 def getEnv():
+    print("Reading Temp")
     # Read from the sensor
     humidity, temperature = envSensor.read(AdafruitDHTSensor, tempAndHumidityPin)
     if humidity is None or temp is None:
@@ -39,7 +37,8 @@ def getEnv():
         humidity, temperature = envSensor.read(AdafruitDHTSensor, tempAndHumidityPin)
         if humidity is None or temp is None:
             humidity = 1000
-        time.sleep(5)
+        time.sleep(3)
+    print("Done Reading Temp")
 
     # If the global temp is set to fahrenheit convert the temp
     if temp == "F":
@@ -50,9 +49,12 @@ def getEnv():
     'temperature' : temperature,
     'humidity' : humidity
     }
+    initialEnv = results
     return(results)
 
+print("Getting Initial Temp")
 initialEnv = getEnv()
+print("Got Initial Temp")
 
 """BEGIN FLASK PAGE DEFINITIONS"""
 
@@ -62,6 +64,10 @@ def index():
     templateData = initialEnv
     return render_template('index.html', **initialEnv)
 
+@app.route('/fullScreen')
+def fullScreenVideo():
+    return render_template('fullScreenVideo.html')
+
 @app.route('/video_feed')
 def video_feed():
     """Direct URL of the video stream"""
@@ -69,11 +75,8 @@ def video_feed():
 
 @app.route('/env')
 def readTempAndHumidity():
-    #  Read the temp and humidity from the sensor
-    env = getEnv()
-
     # Convert the data to JSON
-    env = json.dumps(env)
+    env = json.dumps(getEnv())
 
     # Output the JSON data to the page
     resp = Response(response=env,
@@ -81,24 +84,12 @@ def readTempAndHumidity():
     mimetype="application/json")
     return(resp)
 
-# @app.route("/readPin/<pin>")
-# def readPin(pin):
+@app.route('/exit')
+def exit():
+    exit()
+    return("")
 
-#     GPIO.setup(int(pin), GPIO.OUT)
-#     if GPIO.input(int(pin)) == True:
-#         response = "Pin number " + pin + " is high!"
-#         GPIO.output(int(pin), GPIO.LOW)
-#     else:
-#         response = "Pin number " + pin + " is low!"
-#         GPIO.output(int(pin), GPIO.HIGH)
-
-
-#     templateData = {
-#     'title' : 'Status of pin ' + pin,
-#     'response' : response
-#     }
-#     return render_template('pin.html', **templateData)
-
+print("Ready to rumble!")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True, threaded=True)
