@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from flask import Flask, render_template, Response, jsonify
 from camera_pi import Camera
-from env import getEnv
+from env import getEnv 
 import json
 
 app = Flask(__name__)
@@ -15,6 +15,8 @@ def gen(camera):
         frame = camera.get_frame()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+
 
 """BEGIN FLASK PAGE DEFINITIONS"""
 
