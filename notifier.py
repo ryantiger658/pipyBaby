@@ -5,14 +5,15 @@ from email.mime.text import MIMEText
 import smtplib
 import datetime
 
-threshold = 67.5
+threshold_l = 67.5
+threshold_h = 76.5
 recips = ['john.stange@eglobaltech.com', 'ryan.bolyard@eglobaltech.com']
 sender = "hvac-shaming@egt-labs.com"
 
 resp = getEnv()
-if(resp["temperature"] < threshold):
+if(resp["temperature"] < threshold_l or resp["temperature"] > threshold_h):
   now = datetime.datetime.now()
-  body = str(resp["temperature"])+" degrees Farenheit as of "+now.strftime("%Y-%m-%d %H:%M")
+  body = str(resp["temperature"])+" degrees Fahrenheit as of "+now.strftime("%Y-%m-%d %H:%M")
   print(body)
   msg = MIMEMultipart()
   msg['Subject'] = "Temperature readout in 742"
