@@ -1,15 +1,23 @@
 image: ubuntu
 
 stages:
-  - test
-  - install
-  
-Hello_World:
-  stage: test
+  - Lint
+  - Build
+  - Test
+
+Pylint:
+  stage: Lint
+  image: codacy/codacy-pylint
+  script:
+    - pylint *
+
+Install Dependencies:
+  stage: Build
+  script:
+    - pip install -r requirements.txt
+
+Hello World:
+  stage: Test
   script:
     - echo "Hello!"
     
-Install_Dependencies
-  stage: install
-  script:
-    - pip install -r requirements.txt
