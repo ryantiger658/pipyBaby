@@ -1,3 +1,4 @@
+[![pipeline status](https://gitlab.com/ryantiger658/pipyBaby/badges/master/pipeline.svg)](https://gitlab.com/ryantiger658/pipyBaby/commits/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/08d413dc17462559b0c8/maintainability)](https://codeclimate.com/github/ryantiger658/pipyBaby/maintainability)
 [![CircleCI](https://circleci.com/gh/ryantiger658/pipyBaby.svg?style=svg)](https://circleci.com/gh/ryantiger658/pipyBaby)
 [![Build Status](https://travis-ci.org/ryantiger658/pipyBaby.svg?branch=master)](https://travis-ci.org/ryantiger658/pipyBaby)
