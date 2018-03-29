@@ -10,6 +10,7 @@ Pylint:
   image: codacy/codacy-pylint
   script:
     - pylint ./
+  allow_failure: true
 
 Install Dependencies:
   stage: Build
