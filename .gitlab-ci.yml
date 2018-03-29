@@ -9,6 +9,7 @@ Pylint:
   stage: Lint
   image: codacy/codacy-pylint
   script:
+    - ls
     - pylint ./
   allow_failure: true
 
@@ -16,8 +17,10 @@ Install Dependencies:
   stage: Build
   script:
     - pip install -r requirements.txt
+  allow_failure: true
 
 Hello World:
   stage: Test
   script:
     - echo "Hello!"
+  allow_failure: true
