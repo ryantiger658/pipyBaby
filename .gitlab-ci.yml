@@ -9,7 +9,7 @@ Pylint:
   stage: Lint
   image: codacy/codacy-pylint
   script:
-    - pylint *
+    - pylint ./
 
 Install Dependencies:
   stage: Build
