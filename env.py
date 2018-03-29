@@ -32,11 +32,11 @@ def getEnv():
     'temperature' : round(temperature, 2),
     'humidity' : round(humidity, 2)
     }
-    
+
     #Access the global env temp
-    global initialEnv 
+    global initialEnv
 
     #Update the global temp
-    initialEnv = results 
+    initialEnv = results
 
     return results

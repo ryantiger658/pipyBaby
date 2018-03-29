@@ -20,4 +20,3 @@ Hello World:
   stage: Test
   script:
     - echo "Hello!"
-    

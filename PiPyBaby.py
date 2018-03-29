@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-from flask import Flask, render_template, Response, jsonify
+from flask import Flask, render_template, Response
 from camera_pi import Camera
-from env import getEnv 
+from env import getEnv
 import json
 
 app = Flask(__name__)
 
-# Get the current ambient enviroment 
+# Get the current ambient enviroment
 initialEnv = getEnv()
 
 # Video streaming generator function.
@@ -18,25 +18,25 @@ def gen(camera):
 
 
 
-"""BEGIN FLASK PAGE DEFINITIONS"""
+#"""BEGIN FLASK PAGE DEFINITIONS"""
 
-"""Index Page"""
+#"""Index Page"""
 @app.route('/')
 def index():
-    templateData = initialEnv
+    #templateData = initialEnv
     return render_template('index.html', **initialEnv)
 
-"""Full Screen Video"""
+#"""Full Screen Video"""
 @app.route('/fullScreen')
 def fullScreenVideo():
     return render_template('fullScreenVideo.html')
 
-"""Direct URL of the video stream"""
+#"""Direct URL of the video stream"""
 @app.route('/video_feed')
 def video_feed():
     return Response(gen(Camera()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-"""DHT Envriomental Sensor Page"""
+#"""DHT Envriomental Sensor Page"""
 @app.route('/env')
 def readTempAndHumidity():
     # Convert the data to JSON
@@ -50,4 +50,4 @@ def readTempAndHumidity():
     return(resp)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, threaded=True, debug=True)
+    app.run(host='0.0.0.0', port=80, threaded=True)
